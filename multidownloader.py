@@ -90,8 +90,8 @@ def islive(tasks):
             return True
     return False
 
-def paxel(url, output, blocks=6, proxies=local_proxies):
-    ''' paxel
+def multidownloader(url, output, blocks=6, proxies=local_proxies):
+    ''' multidownloader
     '''
     size = GetUrlFileSize( url, proxies )
     ranges = SpliteBlocks( size, blocks )
@@ -132,8 +132,15 @@ def paxel(url, output, blocks=6, proxies=local_proxies):
 
     filehandle.close()
 
+#url = "http://www.pygtk.org/dist/pygtk2-tut.pdf"
+#output = 'pygtk2.pdf'
 if __name__ == '__main__':
-    url = "http://www.pygtk.org/dist/pygtk2-tut.pdf"
-    output = 'pygtk2.pdf'
-    paxel( url, output, blocks=4, proxies={} )
+    if len(sys.argv) != 3:
+        print "usage: python multidownloader.py url outputfilename"
+        exit(0)
+    else:
+        url = sys.argv[1]
+        output = sys.argv[2]
+
+    multidownloader(url, output, blocks=4, proxies={})
 
